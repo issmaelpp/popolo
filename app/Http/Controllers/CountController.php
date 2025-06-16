@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Count;
 use App\Http\Requests\StoreCountRequest;
 use App\Http\Requests\UpdateCountRequest;
+use App\Services\CountService;
 
 class CountController extends Controller
 {
+    public function __construct(
+        protected CountService $service
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +34,7 @@ class CountController extends Controller
      */
     public function store(StoreCountRequest $request)
     {
-        //
+        $this->service->create($request->validated());
     }
 
     /**

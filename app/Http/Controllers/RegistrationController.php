@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Registration;
 use App\Http\Requests\StoreRegistrationRequest;
 use App\Http\Requests\UpdateRegistrationRequest;
+use App\Services\RegistrationService;
 
 class RegistrationController extends Controller
 {
+    public function __construct(
+        protected RegistrationService $service
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +34,7 @@ class RegistrationController extends Controller
      */
     public function store(StoreRegistrationRequest $request)
     {
-        //
+        $this->service->create($request->validated());
     }
 
     /**

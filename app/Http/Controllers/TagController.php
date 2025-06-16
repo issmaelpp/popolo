@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Tag;
 use App\Http\Requests\StoreTagRequest;
 use App\Http\Requests\UpdateTagRequest;
+use App\Services\TagService;
 
 class TagController extends Controller
 {
+    public function __construct(
+        protected TagService $service
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +34,7 @@ class TagController extends Controller
      */
     public function store(StoreTagRequest $request)
     {
-        //
+        $this->service->create($request->validated());
     }
 
     /**

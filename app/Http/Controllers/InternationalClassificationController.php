@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\InternationalClassification;
 use App\Http\Requests\StoreInternationalClassificationRequest;
 use App\Http\Requests\UpdateInternationalClassificationRequest;
+use App\Services\InternationalClassificationService;
 
 class InternationalClassificationController extends Controller
 {
+    public function __construct(
+        protected InternationalClassificationService $service
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +34,7 @@ class InternationalClassificationController extends Controller
      */
     public function store(StoreInternationalClassificationRequest $request)
     {
-        //
+        $this->service->create($request->validated());
     }
 
     /**

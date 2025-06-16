@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Section;
 use App\Http\Requests\StoreSectionRequest;
 use App\Http\Requests\UpdateSectionRequest;
+use App\Services\SectionService;
 
 class SectionController extends Controller
 {
+    public function __construct(
+        protected SectionService $service
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +34,7 @@ class SectionController extends Controller
      */
     public function store(StoreSectionRequest $request)
     {
-        //
+        $this->service->create($request->validated());
     }
 
     /**

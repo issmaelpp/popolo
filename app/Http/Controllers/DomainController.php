@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Domain;
 use App\Http\Requests\StoreDomainRequest;
 use App\Http\Requests\UpdateDomainRequest;
+use App\Services\DomainService;
 
 class DomainController extends Controller
 {
+    public function __construct(
+        protected DomainService $service
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +34,7 @@ class DomainController extends Controller
      */
     public function store(StoreDomainRequest $request)
     {
-        //
+        $this->service->create($request->validated());
     }
 
     /**

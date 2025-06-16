@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Speech;
 use App\Http\Requests\StoreSpeechRequest;
 use App\Http\Requests\UpdateSpeechRequest;
+use App\Services\SpeechService;
 
 class SpeechController extends Controller
 {
+    public function __construct(
+        protected SpeechService $service
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +34,7 @@ class SpeechController extends Controller
      */
     public function store(StoreSpeechRequest $request)
     {
-        //
+        $this->service->create($request->validated());
     }
 
     /**

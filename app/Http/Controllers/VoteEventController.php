@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\VoteEvent;
 use App\Http\Requests\StoreVoteEventRequest;
 use App\Http\Requests\UpdateVoteEventRequest;
+use App\Services\VoteEventService;
 
 class VoteEventController extends Controller
 {
+    public function __construct(
+        protected VoteEventService $service
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +34,7 @@ class VoteEventController extends Controller
      */
     public function store(StoreVoteEventRequest $request)
     {
-        //
+        $this->service->create($request->validated());
     }
 
     /**

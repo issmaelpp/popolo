@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Identification;
 use App\Http\Requests\StoreIdentificationRequest;
 use App\Http\Requests\UpdateIdentificationRequest;
+use App\Services\IdentificationService;
 
 class IdentificationController extends Controller
 {
+    public function __construct(
+        protected IdentificationService $service
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +34,7 @@ class IdentificationController extends Controller
      */
     public function store(StoreIdentificationRequest $request)
     {
-        //
+        $this->service->create($request->validated());
     }
 
     /**

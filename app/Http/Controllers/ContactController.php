@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use App\Http\Requests\StoreContactRequest;
 use App\Http\Requests\UpdateContactRequest;
+use App\Services\ContactService;
 
 class ContactController extends Controller
 {
+    public function __construct(
+        protected ContactService $service
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +34,7 @@ class ContactController extends Controller
      */
     public function store(StoreContactRequest $request)
     {
-        //
+        $this->service->create($request->validated());
     }
 
     /**

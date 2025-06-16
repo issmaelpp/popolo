@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Subdomain;
 use App\Http\Requests\StoreSubdomainRequest;
 use App\Http\Requests\UpdateSubdomainRequest;
+use App\Services\SubdomainService;
 
 class SubdomainController extends Controller
 {
+    public function __construct(
+        protected SubdomainService $service
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +34,7 @@ class SubdomainController extends Controller
      */
     public function store(StoreSubdomainRequest $request)
     {
-        //
+        $this->service->create($request->validated());
     }
 
     /**

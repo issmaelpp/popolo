@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
+use App\Services\ArticleService;
 
 class ArticleController extends Controller
 {
+    public function __construct(
+        protected ArticleService $service
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +34,7 @@ class ArticleController extends Controller
      */
     public function store(StoreArticleRequest $request)
     {
-        //
+        $this->service->create($request->validated());
     }
 
     /**

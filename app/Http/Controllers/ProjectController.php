@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use App\Services\ProjectService;
 
 class ProjectController extends Controller
 {
+    public function __construct(
+        protected ProjectService $service
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +34,7 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        //
+        $this->service->create($request->validated());
     }
 
     /**

@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Image;
 use App\Http\Requests\StoreImageRequest;
 use App\Http\Requests\UpdateImageRequest;
+use App\Services\ImageService;
 
 class ImageController extends Controller
 {
+    public function __construct(
+        protected ImageService $service
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +34,7 @@ class ImageController extends Controller
      */
     public function store(StoreImageRequest $request)
     {
-        //
+        $this->service->create($request->validated());
     }
 
     /**

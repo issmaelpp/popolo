@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use App\Services\CategoryService;
 
 class CategoryController extends Controller
 {
+    public function __construct(
+        protected CategoryService $service
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +34,7 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        //
+        $this->service->create($request->validated());
     }
 
     /**

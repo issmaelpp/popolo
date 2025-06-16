@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Address;
 use App\Http\Requests\StoreAddressRequest;
 use App\Http\Requests\UpdateAddressRequest;
+use App\Services\AddressService;
 
 class AddressController extends Controller
 {
+    public function __construct(
+        protected AddressService $service
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +34,7 @@ class AddressController extends Controller
      */
     public function store(StoreAddressRequest $request)
     {
-        //
+        $this->service->create($request->validated());
     }
 
     /**

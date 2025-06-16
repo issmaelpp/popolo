@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Registrant;
 use App\Http\Requests\StoreRegistrantRequest;
 use App\Http\Requests\UpdateRegistrantRequest;
+use App\Services\RegistrantService;
 
 class RegistrantController extends Controller
 {
+    public function __construct(
+        protected RegistrantService $service
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +34,7 @@ class RegistrantController extends Controller
      */
     public function store(StoreRegistrantRequest $request)
     {
-        //
+        $this->service->create($request->validated());
     }
 
     /**

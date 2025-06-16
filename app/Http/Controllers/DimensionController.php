@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Dimension;
 use App\Http\Requests\StoreDimensionRequest;
 use App\Http\Requests\UpdateDimensionRequest;
+use App\Services\DimensionService;
 
 class DimensionController extends Controller
 {
+    public function __construct(
+        protected DimensionService $service
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +34,7 @@ class DimensionController extends Controller
      */
     public function store(StoreDimensionRequest $request)
     {
-        //
+        $this->service->create($request->validated());
     }
 
     /**

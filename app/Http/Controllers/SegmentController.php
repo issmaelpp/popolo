@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Segment;
 use App\Http\Requests\StoreSegmentRequest;
 use App\Http\Requests\UpdateSegmentRequest;
+use App\Services\SegmentService;
 
 class SegmentController extends Controller
 {
+    public function __construct(
+        protected SegmentService $service
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +34,7 @@ class SegmentController extends Controller
      */
     public function store(StoreSegmentRequest $request)
     {
-        //
+        $this->service->create($request->validated());
     }
 
     /**

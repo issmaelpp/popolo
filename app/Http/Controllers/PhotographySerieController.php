@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\PhotographySerie;
 use App\Http\Requests\StorePhotographySerieRequest;
 use App\Http\Requests\UpdatePhotographySerieRequest;
+use App\Services\PhotographySerieService;
 
 class PhotographySerieController extends Controller
 {
+    public function __construct(
+        protected PhotographySerieService $service
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +34,7 @@ class PhotographySerieController extends Controller
      */
     public function store(StorePhotographySerieRequest $request)
     {
-        //
+        $this->service->create($request->validated());
     }
 
     /**

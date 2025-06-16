@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Neighborhood;
 use App\Http\Requests\StoreNeighborhoodRequest;
 use App\Http\Requests\UpdateNeighborhoodRequest;
+use App\Services\NeighborhoodService;
 
 class NeighborhoodController extends Controller
 {
+    public function __construct(
+        protected NeighborhoodService $service
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +34,7 @@ class NeighborhoodController extends Controller
      */
     public function store(StoreNeighborhoodRequest $request)
     {
-        //
+        $this->service->create($request->validated());
     }
 
     /**

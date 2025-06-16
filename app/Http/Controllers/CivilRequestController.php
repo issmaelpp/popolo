@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\CivilRequest;
 use App\Http\Requests\StoreCivilRequestRequest;
 use App\Http\Requests\UpdateCivilRequestRequest;
+use App\Services\CivilRequestService;
 
 class CivilRequestController extends Controller
 {
+    public function __construct(
+        protected CivilRequestService $service
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +34,7 @@ class CivilRequestController extends Controller
      */
     public function store(StoreCivilRequestRequest $request)
     {
-        //
+        $this->service->create($request->validated());
     }
 
     /**

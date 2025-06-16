@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Group;
 use App\Http\Requests\StoreGroupRequest;
 use App\Http\Requests\UpdateGroupRequest;
+use App\Services\GroupService;
 
 class GroupController extends Controller
 {
+    public function __construct(
+        protected GroupService $service
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +34,7 @@ class GroupController extends Controller
      */
     public function store(StoreGroupRequest $request)
     {
-        //
+        $this->service->create($request->validated());
     }
 
     /**

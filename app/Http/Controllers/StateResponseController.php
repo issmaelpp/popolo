@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\StateResponse;
 use App\Http\Requests\StoreStateResponseRequest;
 use App\Http\Requests\UpdateStateResponseRequest;
+use App\Services\StateResponseService;
 
 class StateResponseController extends Controller
 {
+    public function __construct(
+        protected StateResponseService $service
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +34,7 @@ class StateResponseController extends Controller
      */
     public function store(StoreStateResponseRequest $request)
     {
-        //
+        $this->service->create($request->validated());
     }
 
     /**

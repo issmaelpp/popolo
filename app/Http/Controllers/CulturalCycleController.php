@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\CulturalCycle;
 use App\Http\Requests\StoreCulturalCycleRequest;
 use App\Http\Requests\UpdateCulturalCycleRequest;
+use App\Services\CulturalCycleService;
 
 class CulturalCycleController extends Controller
 {
+    public function __construct(
+        protected CulturalCycleService $service
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +34,7 @@ class CulturalCycleController extends Controller
      */
     public function store(StoreCulturalCycleRequest $request)
     {
-        //
+        $this->service->create($request->validated());
     }
 
     /**

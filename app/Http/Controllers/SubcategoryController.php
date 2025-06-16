@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Subcategory;
 use App\Http\Requests\StoreSubcategoryRequest;
 use App\Http\Requests\UpdateSubcategoryRequest;
+use App\Services\SubcategoryService;
 
 class SubcategoryController extends Controller
 {
+    public function __construct(
+        protected SubcategoryService $service
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +34,7 @@ class SubcategoryController extends Controller
      */
     public function store(StoreSubcategoryRequest $request)
     {
-        //
+        $this->service->create($request->validated());
     }
 
     /**

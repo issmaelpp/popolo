@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\ForeignOrganization;
 use App\Http\Requests\StoreForeignOrganizationRequest;
 use App\Http\Requests\UpdateForeignOrganizationRequest;
+use App\Services\ForeignOrganizationService;
 
 class ForeignOrganizationController extends Controller
 {
+    public function __construct(
+        protected ForeignOrganizationService $service
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +34,7 @@ class ForeignOrganizationController extends Controller
      */
     public function store(StoreForeignOrganizationRequest $request)
     {
-        //
+        $this->service->create($request->validated());
     }
 
     /**

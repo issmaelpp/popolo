@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Motion;
 use App\Http\Requests\StoreMotionRequest;
 use App\Http\Requests\UpdateMotionRequest;
+use App\Services\MotionService;
 
 class MotionController extends Controller
 {
+    public function __construct(
+        protected MotionService $service
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +34,7 @@ class MotionController extends Controller
      */
     public function store(StoreMotionRequest $request)
     {
-        //
+        $this->service->create($request->validated());
     }
 
     /**

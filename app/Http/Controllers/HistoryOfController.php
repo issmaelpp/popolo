@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\HistoryOf;
 use App\Http\Requests\StoreHistoryOfRequest;
 use App\Http\Requests\UpdateHistoryOfRequest;
+use App\Services\HistoryOfService;
 
 class HistoryOfController extends Controller
 {
+    public function __construct(
+        protected HistoryOfService $service
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +34,7 @@ class HistoryOfController extends Controller
      */
     public function store(StoreHistoryOfRequest $request)
     {
-        //
+        $this->service->create($request->validated());
     }
 
     /**

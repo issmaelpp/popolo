@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\TrafficLine;
 use App\Http\Requests\StoreTrafficLineRequest;
 use App\Http\Requests\UpdateTrafficLineRequest;
+use App\Services\TrafficLineService;
 
 class TrafficLineController extends Controller
 {
+    public function __construct(
+        protected TrafficLineService $service
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +34,7 @@ class TrafficLineController extends Controller
      */
     public function store(StoreTrafficLineRequest $request)
     {
-        //
+        $this->service->create($request->validated());
     }
 
     /**

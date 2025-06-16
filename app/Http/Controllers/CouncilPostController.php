@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\CouncilPost;
 use App\Http\Requests\StoreCouncilPostRequest;
 use App\Http\Requests\UpdateCouncilPostRequest;
+use App\Services\CouncilPostService;
 
 class CouncilPostController extends Controller
 {
+    public function __construct(
+        protected CouncilPostService $service
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +34,7 @@ class CouncilPostController extends Controller
      */
     public function store(StoreCouncilPostRequest $request)
     {
-        //
+        $this->service->create($request->validated());
     }
 
     /**

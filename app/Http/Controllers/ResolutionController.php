@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Resolution;
 use App\Http\Requests\StoreResolutionRequest;
 use App\Http\Requests\UpdateResolutionRequest;
+use App\Services\ResolutionService;
 
 class ResolutionController extends Controller
 {
+    public function __construct(
+        protected ResolutionService $service
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +34,7 @@ class ResolutionController extends Controller
      */
     public function store(StoreResolutionRequest $request)
     {
-        //
+        $this->service->create($request->validated());
     }
 
     /**

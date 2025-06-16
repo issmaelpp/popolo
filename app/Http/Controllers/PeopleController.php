@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\People;
 use App\Http\Requests\StorePeopleRequest;
 use App\Http\Requests\UpdatePeopleRequest;
+use App\Services\PeopleService;
 
 class PeopleController extends Controller
 {
+    public function __construct(
+        protected PeopleService $service
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +34,7 @@ class PeopleController extends Controller
      */
     public function store(StorePeopleRequest $request)
     {
-        //
+        $this->service->create($request->validated());
     }
 
     /**

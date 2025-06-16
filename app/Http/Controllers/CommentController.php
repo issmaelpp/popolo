@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
+use App\Services\CommentService;
 
 class CommentController extends Controller
 {
+    public function __construct(
+        protected CommentService $service
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +34,7 @@ class CommentController extends Controller
      */
     public function store(StoreCommentRequest $request)
     {
-        //
+        $this->service->create($request->validated());
     }
 
     /**

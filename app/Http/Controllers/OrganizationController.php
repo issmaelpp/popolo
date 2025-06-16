@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Organization;
 use App\Http\Requests\StoreOrganizationRequest;
 use App\Http\Requests\UpdateOrganizationRequest;
+use App\Services\OrganizationService;
 
 class OrganizationController extends Controller
 {
+    public function __construct(
+        protected OrganizationService $service
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +34,7 @@ class OrganizationController extends Controller
      */
     public function store(StoreOrganizationRequest $request)
     {
-        //
+        $this->service->create($request->validated());
     }
 
     /**
