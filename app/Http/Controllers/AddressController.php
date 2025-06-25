@@ -18,7 +18,7 @@ class AddressController extends Controller
      */
     public function index()
     {
-        //
+        $collection = $this->service->getAll();
     }
 
     /**
@@ -50,7 +50,7 @@ class AddressController extends Controller
      */
     public function edit(Address $address)
     {
-        //
+        $this->service->find($address->id);
     }
 
     /**
@@ -58,7 +58,7 @@ class AddressController extends Controller
      */
     public function update(UpdateAddressRequest $request, Address $address)
     {
-        //
+        $this->service->update($address->id, $request->validated());
     }
 
     /**
@@ -66,6 +66,6 @@ class AddressController extends Controller
      */
     public function destroy(Address $address)
     {
-        //
+        $this->service->delete($address->id);
     }
 }
